@@ -1,4 +1,4 @@
-import { SearchParams } from "../models";
+import { FilmLocation, SearchParams } from "../models";
 import { pickBy, identity } from "lodash";
 
 const DEFAULT_LIMIT = 20;
@@ -24,6 +24,10 @@ const criterias = [
     data: ["Long métrage", "Série TV", "Téléfilm"],
   },
 ];
+
+export const normalizeApiResponseRecord = (data: {
+  record: { id: string; fields: any };
+}): FilmLocation => ({ id: data.record.id, ...data?.record?.fields });
 
 export const normalizeSearchParams = ({
   limit,
